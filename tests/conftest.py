@@ -29,8 +29,7 @@ def setup(request):
     # headless, SSL 오류 패스를 위한 chrome_option 선언
     # driver = webdriver.Chrome(service=service_obj)
     driver.implicitly_wait(10)
-    request.cls.driver = driver # 여기서 선언한 객체가 클래스로 보내짐, 해당 문이 있으면 return 필요 없음
+    request.cls.driver = driver  # 여기서 선언한 객체가 클래스로 보내짐, 해당 문이 있으면 return 필요 없음
 
-    yield # 테스트 종료 후
-    driver.close() # 브라우저를 닫아줌
-    return driver
+    yield  # 테스트 종료 후
+    driver.close()  # 브라우저를 닫아줌
