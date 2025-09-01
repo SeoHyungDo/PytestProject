@@ -20,9 +20,14 @@ class Test_CoupangTest(passclass) :
         assert apply_store_text == "입점신청"
 
     def test_apply_store_selectbox(self):
-        expected_texts = "오픈마켓\n여행·티켓\n로켓배송\n제휴마케팅\n로켓그로스"
+        expected_text = "오픈마켓\n여행·티켓\n로켓배송\n제휴마케팅\n로켓그로스"
         self.driver.find_element(By.XPATH, '//*[@id="subscribeHeader"]/li[2]/a').click()
         apply_store_select_box = self.driver.find_elements(By.XPATH,'//*[@id="subscribeHeader"]/li[2]/p')
         for select_box_text in apply_store_select_box:
             apply_store_select_box_text = select_box_text.text
-        assert apply_store_select_box_text == expected_texts
+        assert apply_store_select_box_text == expected_text
+
+    def test_login_button(self):
+        login_button = self.driver.find_element(By.XPATH, '//*[@id="wa-top-bar"]/div/menu[1]/li[4]/a')
+        login_button_text = login_button.text
+        assert login_button_text == "로그인"

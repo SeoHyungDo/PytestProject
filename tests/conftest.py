@@ -33,3 +33,16 @@ def setup(request):
 
     yield  # 테스트 종료 후
     driver.close()  # 브라우저를 닫아줌
+
+
+@pytest.fixture(scope="class")
+def setup_tw(request):
+    driver = webdriver.Chrome()
+    driver.get("https://www.tw.coupang.com/")
+    driver.maximize_window()
+    chrome_option = webdriver.ChromeOptions()
+    driver.implicitly_wait(10)
+    request.cls.driver = driver  # 여기서 선언한 객체가 클래스로 보내짐, 해당 문이 있으면 return 필요 없음
+
+    yield  # 테스트 종료 후
+    driver.close()  # 브라우저를 닫아줌
