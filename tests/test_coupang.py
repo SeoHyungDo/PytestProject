@@ -19,6 +19,3 @@ class Test_CoupangTest(passclass) :
         apply_store_text = apply_store.text
         assert apply_store_text == "입점신청"
 
-    #크롬, 파이어폭스, IE 순차 실행
-    # def test_crossbrowser(self, browsercrosscheck) :
-    #    print(self, browsercrosscheck)
