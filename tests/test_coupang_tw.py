@@ -19,6 +19,6 @@ class Test_CoupangTest(passclass_tw) :
         assert login_button_text == "登入" #로그인
 
     def test_customer_join(self):
-        join_button = self.driver.find_element(By.XPATH, '//*[@id="wa-top-bar"]/div/menu[1]/li[3]/a')
+        join_button = self.driver.find_element(By.XPATH, '//*[@id="wa-top-bar"]/div/menu[1]/li[1]/a')
         join_button_text = join_button.text
         assert join_button_text == "註冊會員" #회원가입
