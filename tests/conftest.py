@@ -18,11 +18,30 @@ def Precondition_data() :
     print("사용자 프로필 데이터 생성 중.....")
     return ["Seo", "HyungDo", "May 2nd"]
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser_name", action="store", default="chrome"
+    )
+# 맨 앞 "-- " 부분은 키 변수명 입력 (명령어 맨 앞부분)
+# 키에 값을 할당하여 보관하고 싶은 경우 "store"를 action에 넣어 줌
+# default 속성 = cmd 등을 통해 크롬 등의 값 전달, 아무 정보도 입력하지 않는 경우 default에 세팅 된 기본 값 받음. 통상 크롬을 사용할 것
+# help는 부연 설명으로 필수 아님
+
+
 @pytest.fixture(scope="class")
 def setup(request):
-    driver = webdriver.Chrome()
-    driver.get("https://www.coupang.com/")
-    driver.maximize_window()
+    browser_name = request.config.getoption("browser_name") # 인자로 옵션 이름을 넣어주면 pytest_addoption에 전달했던 값을 받음
+    if browser_name == "chrome" :
+        driver = webdriver.Chrome()
+        driver.get("https://www.coupang.com/")
+        driver.maximize_window()
+    elif browser_name == "firefox" :
+        driver = webdriver.Firefox()
+        driver.get("https://www.coupang.com/")
+        driver.maximize_window()
+    elif browser_name == "IE" :
+        print("IE 브라우저 설치시 IE 사용 가능")
+
     # service_obj = Service(r"\Users\tjg10\PycharmProjects\PythonProject\Chromedriver.exe")
     # Mac의 경우 Chromedriver만 쓰면 됨, .exe는 윈도우에서 기재
     chrome_option = webdriver.ChromeOptions()
@@ -37,9 +56,18 @@ def setup(request):
 
 @pytest.fixture(scope="class")
 def setup_tw(request):
-    driver = webdriver.Chrome()
-    driver.get("https://www.tw.coupang.com/")
-    driver.maximize_window()
+    browser_name = request.config.getoption("browser_name") # 인자로 옵션 이름을 넣어주면 pytest_addoption에 전달했던 값을 받음
+    if browser_name == "chrome" :
+        driver = webdriver.Chrome()
+        driver.get("https://www.tw.coupang.com/")
+        driver.maximize_window()
+    elif browser_name == "firefox" :
+        driver = webdriver.Firefox()
+        driver.get("https://www.tw.coupang.com/")
+        driver.maximize_window()
+    elif browser_name == "IE" :
+        print("IE 브라우저 설치시 IE 사용 가능")
+
     chrome_option = webdriver.ChromeOptions()
     driver.implicitly_wait(10)
     request.cls.driver = driver  # 여기서 선언한 객체가 클래스로 보내짐, 해당 문이 있으면 return 필요 없음
