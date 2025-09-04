@@ -2,11 +2,13 @@ import pytest
 import time
 from selenium.webdriver.common.by import By
 from utility.passclass import passclass
+from vtest_CoupangTest import driver
 
 
 class Test_CoupangTest(passclass) :
 
     def test_favorite_name(self) :
+        favorite_name_obj = coupang_main(self.driver)
         favorite_name = self.driver.find_element(By.XPATH,'//*[@id="wa-bookmark"]')
         favorite_name_text = favorite_name.text
         assert favorite_name_text == "즐겨찾기"
